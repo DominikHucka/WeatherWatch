@@ -15,10 +15,12 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     state = {}
     render() {
         return <nav className="navbar bg-primary" data-bs-theme="dark">
-            <h1>Weahter Analyst</h1>
+            <div className='title'>
+                <h1>WeahterWatch</h1>
+            </div>
             <form className="d-flex" role="search">
                 <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                    <button className="btn btn-outline-light" type="submit">Search</button>
+                <button className="btn btn-outline-light" type="submit">Search</button>
             </form>
         </nav>;
     }
