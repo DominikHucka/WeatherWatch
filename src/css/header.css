@@ -1,0 +1,11 @@
+.navbar {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 80px;
+}
+
+
+.d-flex {
+    padding-right: 30px;
+}
