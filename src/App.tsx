@@ -12,24 +12,36 @@ interface AppState {
 }
 
 class App extends React.Component<AppProps, AppState> {
-    state = {
-        weatherData: null,
-    }   
     apiKey = process.env.REACT_APP_API;
-    
 
-    componentDidMount = () => {
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=reutlingen&appid=${this.apiKey}`)
-        .then(res => res.json())
-        .then(data => this.setState({weatherData: data}))
-        .catch(error => console.error('Fetching Failed', error));
+
+    state: AppState = {
+        weatherData: undefined
     }
 
+
+    componentDidMount = () => {
+        this.fetchApiData();
+    }
+
+
+    fetchApiData() {
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=reutlingen&appid=${this.apiKey}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log('weahter api', data)
+                this.setState({ weatherData: data })
+            })
+            .catch(error => console.error('Fetching Failed', error));
+    }
+
+
     render() {
- 
+        const { weatherData } = this.state;
+
         return <React.Fragment>
             <Header />
-            <MainPage  />
+            <MainPage weatherData={weatherData} />
         </React.Fragment>;
     }
 }
