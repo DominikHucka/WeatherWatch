@@ -24,6 +24,8 @@ class MainPage extends React.Component<MainPageProps, MainPageState> {
 
         return <div className="card" style={{ width: "18rem" }}>
             <div className="card-body">
+                {/* <span>{currentWeather.weahter[0].icon}</span> */}
+                {/* <img src={currentWeather.weahter[0].icon} alt="" /> */}
                 <p>{currentWeather.weather[0].description}</p>
                 <h5 className="card-title">{currentWeather.name}</h5>
                 <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
