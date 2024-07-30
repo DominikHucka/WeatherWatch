@@ -11,6 +11,7 @@ interface AppState {
     weatherData: any;
     isLoading: boolean;
     error: any;
+    currentIcon: { [key: string]: string };
 }
 
 class App extends React.Component<AppProps, AppState> {
@@ -25,6 +26,10 @@ class App extends React.Component<AppProps, AppState> {
         weatherData: undefined,
         isLoading: false,
         error: null,
+        currentIcon: 
+            {
+                Rain: "/image/rainy.png",
+            }
     }
 
 
@@ -72,37 +77,13 @@ class App extends React.Component<AppProps, AppState> {
     };
 
 
-    // componentDidMount = async () => {
-    //     this.fetchApiData();
-    // }
-
-
-    // async fetchApiData() {
-    //     fetch(this.url)
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             console.log('weahter api', data)
-    //             this.setState({
-    //                 weatherData: data,
-    //                 isLoading: false,
-    //             })
-
-    //         })
-    //         .catch(error => {
-    //             this.setState( {
-    //                 isLoading: false,
-    //                 error,
-    //             })
-    //         });
-    // }
-
 
     render() {
-        const { weatherData } = this.state;
+        const { weatherData, currentIcon } = this.state;
 
         return <React.Fragment>
             <Header />
-            <MainPage currentWeather={weatherData} />
+            <MainPage currentWeather={weatherData} icon={currentIcon} />
         </React.Fragment>;
     }
 }

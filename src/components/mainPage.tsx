@@ -4,6 +4,7 @@ import '../css/mainPage.css';
 
 interface MainPageProps {
     currentWeather?: any;
+    icon: { [key: string]: string };
 }
 
 interface MainPageState {
@@ -16,7 +17,7 @@ class MainPage extends React.Component<MainPageProps, MainPageState> {
 
 
     render() {
-        const { currentWeather } = this.props
+        const { currentWeather, icon } = this.props
 
         if (!currentWeather) {
             return <div>Loading...</div>;
@@ -24,6 +25,7 @@ class MainPage extends React.Component<MainPageProps, MainPageState> {
 
         return <div className="card" style={{ width: "18rem" }}>
             <div className="card-body">
+                <img src={icon.Rain} alt="" />
                 {/* <span>{currentWeather.weahter[0].icon}</span> */}
                 {/* <img src={currentWeather.weahter[0].icon} alt="" /> */}
                 <p>{currentWeather.weather[0].description}</p>
