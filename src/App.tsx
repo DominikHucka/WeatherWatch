@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Header from './components/header';
 import MainPage from './components/mainPage';
+import snow from './assets/image/snow.png';
 
 
 interface AppProps {
@@ -28,8 +29,13 @@ class App extends React.Component<AppProps, AppState> {
         error: null,
         currentIcon: 
             {
-                Rain: "/image/rainy.png",
-            }
+                Rain: "./image/rainy.png",
+                Cloudy: "./image/cloudy.png",
+                Snow: "./image/snow.png",
+                SunnyCloudy: "./image/sunny-cloudy.png",
+                Sunny: "./image/sunny.png",
+                Thunder: "./image/thunder.png",
+            }       
     }
 
 
@@ -83,7 +89,7 @@ class App extends React.Component<AppProps, AppState> {
 
         return <React.Fragment>
             <Header />
-            <MainPage currentWeather={weatherData} icon={currentIcon} />
+            <MainPage currentWeather={weatherData} currentIcon={currentIcon} />
         </React.Fragment>;
     }
 }
