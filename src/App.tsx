@@ -9,7 +9,6 @@ interface AppProps {
 
 interface AppState {
     weatherData: any;
-    isLoading: boolean;
     error: any;
     currentIcon: { [key: string]: string };
 }
@@ -23,7 +22,6 @@ class App extends React.Component<AppProps, AppState> {
 
     state = {
         weatherData: undefined,
-        isLoading: false,
         error: null,
         currentIcon:
         {
@@ -51,7 +49,6 @@ class App extends React.Component<AppProps, AppState> {
             (error) => {
                 console.error('Error fetching location', error);
                 this.setState({
-                    isLoading: false,
                     error: 'Error fetching location',
                 });
             }
@@ -59,57 +56,18 @@ class App extends React.Component<AppProps, AppState> {
     };
 
 
-    // fetchWeatherData = async (latitude: number, longitude: number) => {
-    //     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${this.apiKey}&lang=${this.lang}`;
-    //     this.setState({ isLoading: true });
-
-    //     fetch(url)
-    //         .then((res) => res.json())
-    //         .then((data) => {
-    //             console.log('show Current Weather', data)
-    //             this.setState({
-    //                 weatherData: data,
-    //                 isLoading: false,
-    //             });
-    //         })
-    //         .catch((error) => {
-    //             this.setState({
-    //                 isLoading: false,
-    //                 error,
-    //             });
-    //         });
-    // };
-
-
     fetchWeatherData = async (latitude: number, longitude: number) => {
         const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${this.apiKey}&lang=${this.lang}`;
 
-        this.setState({ isLoading: true });
-
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            const data = await response.json();
-            console.log('show Current Weather', data);
-
-            this.setState({
-                weatherData: data,
-                isLoading: false,
-                error: null,
-            });
-        } catch (error) {
-            console.error('Error fetching weather data:', error);
-            this.setState({
-                isLoading: false,
-                // error: error.message,
-            });
-        }
+        fetch(url)
+            .then((res) => res.json())
+            .then((data) => {
+                console.log('show Current Weather', data)
+                this.setState({
+                    weatherData: data,
+                });
+            })
     };
-
-
 
 
     render() {

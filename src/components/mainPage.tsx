@@ -7,18 +7,31 @@ interface MainPageProps {
 }
 
 interface MainPageState {
-    name: string | undefined;
+    isLoading: boolean;
 }
 
 
 
 class MainPage extends React.Component<MainPageProps, MainPageState> {
     state = {
-        name: undefined,
+        isLoading: true,
     }
-    weather = this.props.currentWeather;
+    // weather = this.props.currentWeather;
     // weatherMain = this.props.currentWeather.weather[0].main;
-    
+
+
+    componentDidMount(): void {
+        if (this.props.currentWeather && this.props.currentWeather.name) {
+            this.setState({ isLoading: false });
+        }
+    }
+
+
+    componentDidUpdate(prevProps: Readonly<MainPageProps>, prevState: Readonly<MainPageState>, snapshot?: any): void {
+        if (prevProps.currentWeather !== this.props.currentWeather && this.props.currentWeather.name) {
+            this.setState({ isLoading: false });
+        }
+    }
 
 
     showCurrentIcon = (icon: { [key: string]: string }, name: string) => {
@@ -26,7 +39,8 @@ class MainPage extends React.Component<MainPageProps, MainPageState> {
             if (key.toLowerCase() === name.toLowerCase()) {
                 return icon[key];
             } else {
-                return console.error("ERROR");
+                console.error("ERROR");
+                return "";
             }
         }
         return "";
@@ -34,28 +48,34 @@ class MainPage extends React.Component<MainPageProps, MainPageState> {
 
 
     render() {
-        // const main = this.weather.weather[0].main;
+        if (this.state.isLoading || !this.props.currentWeather || !this.props.currentWeather.name) {
+            return <p>Loading...</p>; 
+        }
+        // if (!this.weather || !this.weatherMain) {
+        //     return <p>Loading...</p>; 
+        // }
+        const main = this.props.currentWeather.weather[0].main;
         // console.log("show name", main);
         // const { currentIcon } = this.props;
         // console.log(this.weatherMain)
         // let name = this.props.currentWeather.weather[0].main;
         // console.log(name);
 
-        // const srcIcon = this.showCurrentIcon(this.props.currentIcon, main);
+        const srcIcon = this.showCurrentIcon(this.props.currentIcon, main);
         // console.log("show icon", srcIcon);
-        if(!this.weather) {
-            <p>Loading...</p>
-        }
+        // if(!this.weather) {
+        //     <p>Loading...</p>
+        // }
 
 
 
         return <div className="card" style={{ width: "18rem" }}>
             <div className="card-body">
-                {/* <img src= {this.props.currentIcon.Clouds} style={{ width: "100px", height: "auto" }} alt="" /> */}
-                {/* <img src={srcIcon} style={{ width: "100px", height: "auto" }} alt="" /> */}
+                {/* <img src={this.props.currentIcon.Clouds} style={{ width: "100px", height: "auto" }} alt="" /> */}
+                <img src={srcIcon} style={{ width: "100px", height: "auto" }} alt="" />
                 {/* <p>{name}</p> */}
-                {/* <p>{main}</p> */}
-                <h5 className="card-title">{this.weather.name}</h5>
+                {/* <p>{this.weatherMain}</p> */}
+                <h5 className="card-title">{this.props.currentWeather.name}</h5>
                 <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
                 <img src="assets/image/thunder.png" alt="" />
             </div>
