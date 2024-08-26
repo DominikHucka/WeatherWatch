@@ -15,7 +15,8 @@ interface AppState {
 
 class App extends React.Component<AppProps, AppState> {
     apiKey = process.env.REACT_APP_API;
-    location = navigator.geolocation.getCurrentPosition;
+    // location = navigator.geolocation.getCurrentPosition;
+    location = 'London';
     lang = 'de';
     url = `https://api.openweathermap.org/data/2.5/weather?q=${this.location}&appid=${this.apiKey}&lang=${this.lang}`;
 
@@ -36,30 +37,44 @@ class App extends React.Component<AppProps, AppState> {
 
 
     componentDidMount = async () => {
-        this.getLocationAndFetchWeather();
+        // this.getLocationAndFetchWeather();
+        this.fetchWeatherData();
     };
 
 
-    getLocationAndFetchWeather = async () => {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                const { latitude, longitude } = position.coords;
-                this.fetchWeatherData(latitude, longitude);
-            },
-            (error) => {
-                console.error('Error fetching location', error);
-                this.setState({
-                    error: 'Error fetching location',
-                });
-            }
-        );
-    };
+    // getLocationAndFetchWeather = async () => {
+    //     navigator.geolocation.getCurrentPosition(
+    //         (position) => {
+    //             const { latitude, longitude } = position.coords;
+    //             this.fetchWeatherData(latitude, longitude);
+    //         },
+    //         (error) => {
+    //             console.error('Error fetching location', error);
+    //             this.setState({
+    //                 error: 'Error fetching location',
+    //             });
+    //         }
+    //     );
+    // };
 
 
-    fetchWeatherData = async (latitude: number, longitude: number) => {
-        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${this.apiKey}&lang=${this.lang}`;
+    // fetchWeatherData = async (latitude: number, longitude: number) => {
+    //     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${this.apiKey}&lang=${this.lang}`;
 
-        fetch(url)
+    //     fetch(url)
+    //         .then((res) => res.json())
+    //         .then((data) => {
+    //             console.log('show Current Weather', data)
+    //             this.setState({
+    //                 weatherData: data,
+    //             });
+    //         })
+    // };
+
+    fetchWeatherData = async () => {
+        // const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${this.apiKey}&lang=${this.lang}`;
+
+        fetch(this.url)
             .then((res) => res.json())
             .then((data) => {
                 console.log('show Current Weather', data)
@@ -68,6 +83,7 @@ class App extends React.Component<AppProps, AppState> {
                 });
             })
     };
+
 
 
     render() {
