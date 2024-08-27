@@ -16,13 +16,13 @@ class MainPage extends React.Component<MainPageProps, MainPageState> {
     state = {
         isLoading: true,
     }
-    
 
-    componentDidMount(): void {
-        if (this.props.currentWeather) {
-            this.setState({ isLoading: false });
-        }
-    }
+
+    // componentDidMount(): void {
+    //     if (this.props.currentWeather) {
+    //         this.setState({ isLoading: false });
+    //     }
+    // }
 
 
     componentDidUpdate(prevProps: Readonly<MainPageProps>, _prevState: Readonly<MainPageState>, _snapshot?: any): void {
@@ -56,39 +56,45 @@ class MainPage extends React.Component<MainPageProps, MainPageState> {
     showIcon = (): string => {
         if (!this.props.currentWeather || !this.props.currentWeather.weather) return '';
 
-        const weatherMain = this.props.currentWeather.weather[0]?.main.toLowerCase(); 
-        const icon = this.props.currentIcon[weatherMain]; 
+        const weatherMain = this.props.currentWeather.weather[0]?.main.toLowerCase();
+        const icon = this.props.currentIcon[weatherMain];
 
         if (icon) {
             return icon;
         }
 
-        return ''; 
+        return '';
     }
 
 
     render() {
         if (this.state.isLoading || !this.props.currentWeather) {
-            return <p>Loading...</p>; 
+            return <p>Loading...</p>;
         }
-        
-        const main = this.props.currentWeather.weather[0].main;
 
+        const weatherMain = this.props.currentWeather.weather[0].main;
+        const name = this.props.currentWeather.name;
         const iconSrc = this.showIcon();
-      
 
 
-        return <div className="card" style={{ width: "18rem" }}>
-            <div className="card-body">
-            {iconSrc ? (
-                        <img src={iconSrc} style={{ width: "100px", height: "auto" }} alt={main} />
-                    ) : (
-                        <p>Icon not available</p>
-                    )}
-                <p>{main}</p>
-                <h5 className="card-title">{this.props.currentWeather.name}</h5>
-                <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <img src="assets/image/thunder.png" alt="" />
+
+        return <div>
+            <div className='head'>
+                <div className='burger-menu'>
+
+                </div>
+                <h2>
+                    {name}
+                </h2>
+            </div>
+            <div className="card" style={{ width: "18rem" }}>
+                <div className="card-body">
+                    {/* <img src={iconSrc} style={{ width: "100px", height: "auto" }} alt={main} /> */}
+                    {/* <p>{main}</p> */}
+                    {/* <h5 className="card-title">{this.props.currentWeather.name}</h5> */}
+                    <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <img src="assets/image/thunder.png" alt="" />
+                </div>
             </div>
         </div>
     }

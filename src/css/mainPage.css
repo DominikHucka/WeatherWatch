@@ -1,3 +1,41 @@
 .card {
     margin: 20px;
 }
+
+
+.head {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+
+.burger-menu {
+    width: 40px;
+    background-color: var(--bs-light);
+    height: 3px;
+}
+
+
+.burger-menu::after {
+    content: '';
+    position: absolute;
+    left: 10;
+    bottom: 0;
+    top: 25px;
+    width: 40px;
+    background-color: var(--bs-light);
+    height: 3px;
+}
+
+
+.burger-menu::before {
+    content: '';
+    position: absolute;
+    left: 10;
+    bottom: 0;
+    top: 50px;
+    width: 40px;
+    background-color: var(--bs-light);
+    height: 3px;
+}

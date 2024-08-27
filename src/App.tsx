@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Header from './components/header';
 import MainPage from './components/mainPage';
+import Sidebar from './components/sidebar';
 
 
 interface AppProps {
@@ -24,6 +25,7 @@ class App extends React.Component<AppProps, AppState> {
     state = {
         weatherData: undefined,
         error: null,
+        isLoading: true,
         currentIcon:
         {
             Rain: "./image/rainy.png",
@@ -40,6 +42,7 @@ class App extends React.Component<AppProps, AppState> {
         // this.getLocationAndFetchWeather();
         this.fetchWeatherData();
     };
+
 
 
     // getLocationAndFetchWeather = async () => {
@@ -71,7 +74,7 @@ class App extends React.Component<AppProps, AppState> {
     //         })
     // };
 
-    fetchWeatherData = async () => {
+    fetchWeatherData = () => {
         // const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${this.apiKey}&lang=${this.lang}`;
 
         fetch(this.url)
@@ -89,7 +92,8 @@ class App extends React.Component<AppProps, AppState> {
     render() {
 
         return <React.Fragment>
-            <Header />
+            {/* <Header /> */}
+            <Sidebar /> 
             <MainPage currentWeather={this.state.weatherData} currentIcon={this.state.currentIcon} />
         </React.Fragment>;
     }

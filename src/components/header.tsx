@@ -1,14 +1,16 @@
 import * as React from 'react';
 import '../css/header.css';
-
+    
 
 interface HeaderProps {
 
 }
 
+
 interface HeaderState {
 
 }
+
 
 class Header extends React.Component<HeaderProps, HeaderState> {
     state = {}

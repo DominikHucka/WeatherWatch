@@ -1,12 +1,25 @@
+* {
+  box-sizing: border-box;
+}
+
+
 h1, h2, h3 {
     font-family: 'Merriweather Sans', Arial, Helvetica, sans-serif;
     font-weight: 700;
     font-style: italic;
+    color: var(--bs-light) !important;
 }
 
 
 body {
     margin: 0;
+    padding: 20px;
+    background: linear-gradient(to bottom, #649ff8, #f1ffa0);
+    height: 100vh;
+    /* background-image: url('../public/image/background.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover; */
 }
 
 
