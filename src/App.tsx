@@ -1,102 +1,83 @@
 import * as React from 'react';
-import Header from './components/header';
 import MainPage from './components/mainPage';
-import Sidebar from './components/sidebar';
+// import { useState, useEffect } from 'react';
+// import Header from './components/header';
+// import MainPage from './components/mainPage';
+// import Sidebar from './components/sidebar';
 
 
-interface AppProps {
-
-}
-
-interface AppState {
-    weatherData: any;
-    error: any;
-    currentIcon: { [key: string]: string };
-}
-
-class App extends React.Component<AppProps, AppState> {
-    apiKey = process.env.REACT_APP_API;
-    // location = navigator.geolocation.getCurrentPosition;
-    location = 'London';
-    lang = 'de';
-    url = `https://api.openweathermap.org/data/2.5/weather?q=${this.location}&appid=${this.apiKey}&lang=${this.lang}`;
+const App = () => {
+    const apiKey = process.env.REACT_APP_API;
+    // const location = navigator.geolocation.getCurrentPosition;
+    const location = 'London';
+    const lang = 'de';
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&lang=${lang}`;
 
 
-    state = {
-        weatherData: undefined,
-        error: null,
-        isLoading: true,
-        currentIcon:
-        {
-            Rain: "./image/rainy.png",
-            Clouds: "./image/cloudy.png",
-            Snow: "./image/snow.png",
-            SunnyCloudy: "./image/sunny-cloudy.png",
-            Sunny: "./image/sunny.png",
-            Thunderstorm: "./image/thunder.png",
+    const [weatherData, setWeatherData] = React.useState<WeatherData | null>(null);
+    const [loading, setLoading] = React.useState(true);
+    const [error, setError] = React.useState(null);
+    const currentIcon =
+    {
+        Rain: "./image/rainy.png",
+        Clouds: "./image/cloudy.png",
+        Snow: "./image/snow.png",
+        SunnyCloudy: "./image/sunny-cloudy.png",
+        Sunny: "./image/sunny.png",
+        Thunderstorm: "./image/thunder.png",
+    }
+
+    React.useEffect(() => {
+        const fetchWeatherData = async () => {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setWeatherData(data);
+                console.log('show data', data);
+            } catch (e) {
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchWeatherData();
+    }, [url]);
+
+
+    const getIconForWeather = (weatherDescription: string) => {
+        switch (weatherDescription) {
+            case 'Rain':
+                return currentIcon.Rain;
+            case 'Clouds':
+                return currentIcon.Clouds;
+            case 'Snow':
+                return currentIcon.Snow;
+            case 'Clear':
+                return currentIcon.Sunny;
+            case 'Thunderstorm':
+                return currentIcon.Thunderstorm;
+            default:
+                return currentIcon.SunnyCloudy;
         }
-    }
-
-
-    componentDidMount = async () => {
-        // this.getLocationAndFetchWeather();
-        this.fetchWeatherData();
     };
 
-
-
-    // getLocationAndFetchWeather = async () => {
-    //     navigator.geolocation.getCurrentPosition(
-    //         (position) => {
-    //             const { latitude, longitude } = position.coords;
-    //             this.fetchWeatherData(latitude, longitude);
-    //         },
-    //         (error) => {
-    //             console.error('Error fetching location', error);
-    //             this.setState({
-    //                 error: 'Error fetching location',
-    //             });
-    //         }
-    //     );
-    // };
-
-
-    // fetchWeatherData = async (latitude: number, longitude: number) => {
-    //     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${this.apiKey}&lang=${this.lang}`;
-
-    //     fetch(url)
-    //         .then((res) => res.json())
-    //         .then((data) => {
-    //             console.log('show Current Weather', data)
-    //             this.setState({
-    //                 weatherData: data,
-    //             });
-    //         })
-    // };
-
-    fetchWeatherData = () => {
-        // const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${this.apiKey}&lang=${this.lang}`;
-
-        fetch(this.url)
-            .then((res) => res.json())
-            .then((data) => {
-                console.log('show Current Weather', data)
-                this.setState({
-                    weatherData: data,
-                });
-            })
-    };
-
-
-
-    render() {
-
-        return <React.Fragment>
-            {/* <Header /> */}
-            <Sidebar /> 
-            <MainPage currentWeather={this.state.weatherData} currentIcon={this.state.currentIcon} />
-        </React.Fragment>;
-    }
+    return (
+        <div>
+            {loading && <p>Loading...</p>}
+            {error && <p>Error: {error}</p>}
+            {weatherData && (
+                <MainPage
+                    weatherData={weatherData}
+                    weatherIcon={getIconForWeather(weatherData.weather[0].main)}
+                />
+            )}
+        </div>
+    );
 }
+
 
 export default App;
