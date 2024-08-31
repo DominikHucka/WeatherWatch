@@ -1,20 +1,27 @@
+import { disconnect } from 'process';
 import * as React from 'react';
-import { Component } from 'react';
 
 
-interface SidbarProps {
 
+interface SideBarProps {
+    // showSideBar: () => void;
+    data: any;
 }
 
-interface SidbarState {
 
-}
-
-class Sidbar extends React.Component<SidbarProps, SidbarState> {
-    state = {}
-    render() {
-        return <div></div>;
+const SideBar: React.FC<SideBarProps> = ({data}) => {
+    const test = () => {
+        console.log(test)
+        data;
     }
+
+
+
+    return (
+        <div>hello</div>
+    ) 
+    
 }
 
-export default Sidbar;
+
+export default SideBar;

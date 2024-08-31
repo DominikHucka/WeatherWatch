@@ -1,5 +1,6 @@
 import * as React from 'react';
 import MainPage from './components/mainPage';
+import SideBar from './components/sidebar';
 
 
 const App = () => {
@@ -9,7 +10,7 @@ const App = () => {
     const location = 'Reutlingen';
     const lang = 'de';
     const currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&lang=${lang}`;
-    // const forecastDailyURL = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${location},DE&appid=${apiDaily}`;
+    // const forecastDailyURL = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${location},DE&appid=${apiKey}`;
 
 
     const [weatherData, setWeatherData] = React.useState<any | null>(null);
@@ -42,8 +43,8 @@ const App = () => {
 
         // fetchDailyWeatherData();
         fetchCurrentWeatherData();
-    }, [currentWeatherURL]
-    // [currentWeatherURL, forecastDailyURL]
+    }, 
+    [currentWeatherURL]
     );
 
 
@@ -78,7 +79,6 @@ const App = () => {
     //     } finally {
     //         setLoading2(false);
     //     }
-    //     debugger;
     // }
 
 
@@ -113,6 +113,7 @@ const App = () => {
                     weatherIcon={getIconForWeather(weatherData.weather[0].main)}
                 />
             )}
+            <SideBar data={undefined} />
         </div>
     );
 }
