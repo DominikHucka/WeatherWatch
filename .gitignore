@@ -26,3 +26,6 @@ yarn-error.log*
 
 # api
 .env
+
+# draw
+cover.drawio

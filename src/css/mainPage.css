@@ -1,41 +1,43 @@
-.card {
-    margin: 20px;
-}
-
-
-.head {
+.header {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 50px;
 }
 
 
 .burger-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    cursor: pointer;
+}
+
+
+.burger-menu div {
     width: 40px;
     background-color: var(--bs-light);
     height: 3px;
 }
 
 
-.burger-menu::after {
-    content: '';
-    position: absolute;
-    left: 10;
-    bottom: 0;
-    top: 25px;
-    width: 40px;
-    background-color: var(--bs-light);
-    height: 3px;
+.first-section {
+    display: flex;
+    gap: 50px;
 }
 
 
-.burger-menu::before {
-    content: '';
-    position: absolute;
-    left: 10;
-    bottom: 0;
-    top: 50px;
-    width: 40px;
-    background-color: var(--bs-light);
-    height: 3px;
+.weather-icon {
+    height: 60px;
+    width: auto;
+}
+
+
+.second-section {
+    display: flex;
+    gap: 40%;
+}
+
+
+.second-section h1 {
+    font-size: 56px;
 }
