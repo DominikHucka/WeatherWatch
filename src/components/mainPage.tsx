@@ -15,7 +15,7 @@ const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon }) => {
     const maxTemp = weatherData.main.temp_max;
     const minTemp = weatherData.main.temp_min;
     const feelsLike = weatherData.main.feels_like;
-    const [ open, getOpenSideBar ] = React.useState(false);
+    const [showOverlay, setShowOverlay] = React.useState(false);
 
 
     const kelvinToCelsius = (kelvin: number) => {
@@ -24,9 +24,9 @@ const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon }) => {
 
 
     const showSideBar = () => {
-        
+        setShowOverlay(true);
         console.log("its worked");
-        
+
     }
 
 
@@ -54,7 +54,7 @@ const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon }) => {
                 <img className='weather-icon' src={weatherIcon} alt="" />
                 {/* <img className='weather-icon' src={weatherData.weather[0].icon} alt="" /> */}
             </div>
-            <SideBar showSideBar = {showSideBar}/>
+            {showOverlay && <SideBar showSideBar={showSideBar} />}
         </div>
     )
 }
