@@ -1,6 +1,6 @@
 import * as React from 'react';
 import '../css/mainPage.css';
-// import SideBar from './sidebar';
+import SideBar from './sidebar';
 
 
 interface MainPageProps {
@@ -24,6 +24,7 @@ const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon }) => {
 
 
     const showSideBar = () => {
+        
         console.log("its worked");
         
     }
@@ -53,7 +54,7 @@ const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon }) => {
                 <img className='weather-icon' src={weatherIcon} alt="" />
                 {/* <img className='weather-icon' src={weatherData.weather[0].icon} alt="" /> */}
             </div>
-            {/* <SideBar /> */}
+            <SideBar showSideBar = {showSideBar}/>
         </div>
     )
 }

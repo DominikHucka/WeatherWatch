@@ -113,7 +113,7 @@ const App = () => {
                     weatherIcon={getIconForWeather(weatherData.weather[0].main)}
                 />
             )}
-            <SideBar data={undefined} />
+            <SideBar />
         </div>
     );
 }

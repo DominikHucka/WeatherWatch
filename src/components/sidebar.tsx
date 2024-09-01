@@ -1,24 +1,22 @@
-import { disconnect } from 'process';
 import * as React from 'react';
-
-
+import '../css/sidebar.css';
 
 interface SideBarProps {
-    // showSideBar: () => void;
-    data: any;
+    showSideBar: () => void;
 }
 
 
-const SideBar: React.FC<SideBarProps> = ({data}) => {
+const SideBar: React.FC<SideBarProps> = () => {
     const test = () => {
         console.log(test)
-        data;
     }
 
 
 
     return (
-        <div>hello</div>
+        <div ref={overlay} className='overlay'>
+            <h2>hello</h2>
+        </div>
     ) 
     
 }
