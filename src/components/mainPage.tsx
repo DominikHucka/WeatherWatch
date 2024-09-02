@@ -7,15 +7,17 @@ interface MainPageProps {
     weatherData: any;
     // dailyData: any;
     weatherIcon: string;
+    showSideBar: () => void;
 }
 
 
 const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon }) => {
+    let mainPage = React.useRef<HTMLDivElement>(null);
     const temp = weatherData.main.temp;
     const maxTemp = weatherData.main.temp_max;
     const minTemp = weatherData.main.temp_min;
     const feelsLike = weatherData.main.feels_like;
-    const [showOverlay, setShowOverlay] = React.useState(false);
+    // const [showOverlay, setShowOverlay] = React.useState(false);
 
 
     const kelvinToCelsius = (kelvin: number) => {
@@ -24,16 +26,14 @@ const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon }) => {
 
 
     const showSideBar = () => {
-        setShowOverlay(true);
-        console.log("its worked");
-
+        // mainPage.current?.classList.add('d-none');
     }
 
 
     return (
         <div className='header'>
             <div className='first-section'>
-                <div onClick={showSideBar} className='burger-menu'>
+                <div ref={mainPage} onClick={showSideBar} className='burger-menu'>
                     <div></div>
                     <div></div>
                     <div></div>
@@ -54,7 +54,7 @@ const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon }) => {
                 <img className='weather-icon' src={weatherIcon} alt="" />
                 {/* <img className='weather-icon' src={weatherData.weather[0].icon} alt="" /> */}
             </div>
-            {showOverlay && <SideBar showSideBar={showSideBar} />}
+            <SideBar showSideBar={showSideBar} />
         </div>
     )
 }

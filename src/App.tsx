@@ -1,5 +1,6 @@
 import * as React from 'react';
 import MainPage from './components/mainPage';
+import './css/app.css';
 import SideBar from './components/sidebar';
 
 
@@ -16,9 +17,7 @@ const App = () => {
     const [weatherData, setWeatherData] = React.useState<any | null>(null);
     // const [dailyData, setDailyData] = React.useState<any | null>(null);
     const [loading, setLoading] = React.useState(true);
-    // const [loading2, setLoading2] = React.useState(true);
     const [error, setError] = React.useState(null);
-    // const [error2, setError2] = React.useState(null);
     const currentIcon =
     {
         Rain: "./image/rainy.png",
@@ -43,8 +42,8 @@ const App = () => {
 
         // fetchDailyWeatherData();
         fetchCurrentWeatherData();
-    }, 
-    [currentWeatherURL]
+    },
+        [currentWeatherURL]
     );
 
 
@@ -100,14 +99,18 @@ const App = () => {
     };
 
 
+    const showSideBar = () => {
+        
+    }
+
+
     return (
         <div>
             {loading && <p>Loading...</p>}
-            {/* {loading2 && <p>Loading...</p>} */}
             {error && <p>Error: {error}</p>}
-            {/* {error2 && <p>Error: {error}</p>} */}
             {weatherData && (
                 <MainPage
+                    showSideBar={showSideBar}
                     weatherData={weatherData}
                     // dailyData={dailyData}
                     weatherIcon={getIconForWeather(weatherData.weather[0].main)}

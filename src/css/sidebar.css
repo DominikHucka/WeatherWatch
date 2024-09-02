@@ -8,7 +8,10 @@
     left: 0;
     right: 0;
     display: none;
+
 }
 
 
-
+.d-none {
+    display: none;
+}

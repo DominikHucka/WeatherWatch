@@ -2,25 +2,31 @@ import * as React from 'react';
 import '../css/sidebar.css';
 
 interface SideBarProps {
-    showSideBar(): void;
+    showSideBar: () => void;
 }
 
 
-const SideBar: React.FC<SideBarProps> = () => {
-    const showOverlay = React.useRef<HTMLDivElement>(null);
+
+const SideBar: React.FC<SideBarProps> = ({ showSideBar }) => {
+    let overlaySideBar = React.useRef<HTMLDivElement>(null);
 
 
-    const showSideBar = () => {
-        console.log('ho ho', showSideBar)
+    const handleClick = () => {
+        overlaySideBar.current?.classList.add('d-none');
+        showSideBar();
     }
 
 
+
+
     return (
-        <div ref={showOverlay} className='overlay'>
+        <div ref={overlaySideBar} className='overlay'>
             <h2>hello</h2>
+            <div onClick={handleClick}>x</div>
         </div>
-    ) 
-    
+        
+    )
+
 }
 
 
