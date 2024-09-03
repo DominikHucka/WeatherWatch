@@ -5,6 +5,7 @@ import SideBar from './components/sidebar';
 
 
 const App = () => {
+    const app = React.useRef<HTMLDivElement>(null);
     const apiKey = process.env.REACT_APP_API;
     // const apiDaily = process.env.REACT_APP_API_DAILY;
     // const location = navigator.geolocation.getCurrentPosition;
@@ -12,6 +13,7 @@ const App = () => {
     const lang = 'de';
     const currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&lang=${lang}`;
     // const forecastDailyURL = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${location},DE&appid=${apiKey}`;
+    const animation = false;
 
 
     const [weatherData, setWeatherData] = React.useState<any | null>(null);
@@ -27,6 +29,7 @@ const App = () => {
         Sunny: "./image/sunny.png",
         Thunderstorm: "./image/thunder.png",
     }
+    // const [animation, setAnimation] = React.useState(false);
 
 
     React.useEffect(() => {
@@ -99,18 +102,19 @@ const App = () => {
     };
 
 
-    const showSideBar = () => {
-        
+    const getAnimation = () => {
+        app.current?.classList.toggle('fade-in-animation');
+        app.current?.classList.toggle('fade-out-animation');
     }
 
 
     return (
-        <div>
+        <div ref={app}>
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error}</p>}
             {weatherData && (
                 <MainPage
-                    showSideBar={showSideBar}
+                    getAnimation={getAnimation}
                     weatherData={weatherData}
                     // dailyData={dailyData}
                     weatherIcon={getIconForWeather(weatherData.weather[0].main)}

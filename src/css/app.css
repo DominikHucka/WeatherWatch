@@ -1,16 +1,33 @@
-.fadeOutAnimation {
-    animation: fadeOut ease-in-out 225ms;
+.fade-in-animation {
+    animation: fadeIn forwards 225ms;
 }
 
 
-@keyframes fadeOut {
+@keyframes fadeIn {
     from {
-        transform: translateY(0);
+        transform: translateX(0);
     }
 
     to {
         transform: translateX(80%);
     }
 }
+
+
+.fade-out-animation {
+    animation: fadeOut forwards 225ms;
+}
+
+
+@keyframes fadeOut {
+    from {
+        transform: translateX(80%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
 
 

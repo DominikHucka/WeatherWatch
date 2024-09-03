@@ -7,12 +7,13 @@ interface MainPageProps {
     weatherData: any;
     // dailyData: any;
     weatherIcon: string;
-    showSideBar: () => void;
+    getAnimation: () => void;
 }
 
 
-const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon }) => {
-    let mainPage = React.useRef<HTMLDivElement>(null);
+const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon, getAnimation }) => {
+    // let mainPage = React.useRef<HTMLDivElement>(null);
+    const [toggle, getToggle] = React.useState(false);
     const temp = weatherData.main.temp;
     const maxTemp = weatherData.main.temp_max;
     const minTemp = weatherData.main.temp_min;
@@ -26,14 +27,14 @@ const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon }) => {
 
 
     const showSideBar = () => {
-        // mainPage.current?.classList.add('d-none');
+        getAnimation();
     }
 
 
     return (
         <div className='header'>
             <div className='first-section'>
-                <div ref={mainPage} onClick={showSideBar} className='burger-menu'>
+                <div onClick={showSideBar} className='burger-menu'>
                     <div></div>
                     <div></div>
                     <div></div>
@@ -54,7 +55,7 @@ const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon }) => {
                 <img className='weather-icon' src={weatherIcon} alt="" />
                 {/* <img className='weather-icon' src={weatherData.weather[0].icon} alt="" /> */}
             </div>
-            <SideBar showSideBar={showSideBar} />
+            <SideBar />
         </div>
     )
 }
