@@ -13,7 +13,7 @@ interface MainPageProps {
 
 const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon, getAnimation }) => {
     // let mainPage = React.useRef<HTMLDivElement>(null);
-    const [toggle, getToggle] = React.useState(false);
+    // const [toggle, getToggle] = React.useState(false);
     const temp = weatherData.main.temp;
     const maxTemp = weatherData.main.temp_max;
     const minTemp = weatherData.main.temp_min;
@@ -27,7 +27,10 @@ const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon, getAnimat
 
 
     const showSideBar = () => {
-        getAnimation();
+        setTimeout(() => {
+            getAnimation();
+        }, 100);
+        
     }
 
 

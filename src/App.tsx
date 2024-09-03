@@ -1,7 +1,6 @@
 import * as React from 'react';
 import MainPage from './components/mainPage';
 import './css/app.css';
-import SideBar from './components/sidebar';
 
 
 const App = () => {
@@ -9,11 +8,13 @@ const App = () => {
     const apiKey = process.env.REACT_APP_API;
     // const apiDaily = process.env.REACT_APP_API_DAILY;
     // const location = navigator.geolocation.getCurrentPosition;
+    // const monitoring = 'hourly'
     const location = 'Reutlingen';
     const lang = 'de';
     const currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&lang=${lang}`;
-    // const forecastDailyURL = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${location},DE&appid=${apiKey}`;
-    const animation = false;
+    // const forecastDailyURL = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&lang=${lang}`;
+    // const forecastDailyURL = `https://api.openweathermap.org/data/3.0/oweather?q=${location}&exclude=${monitoring}&appid=${apiKey}`;
+    // const animation = false;
 
 
     const [weatherData, setWeatherData] = React.useState<any | null>(null);
@@ -70,16 +71,18 @@ const App = () => {
     // const catchDailyWeather = async () => {
     //     try {
     //         let response = await fetch(forecastDailyURL);
+    //         console.log("test", response);
     //         if (!response.ok) {
     //             throw new Error('Network response was not ok');
     //         }
     //         const data2 = await response.json();
+            
     //         setDailyData(data2);
     //         console.log('show daily weather', data2);
     //     } catch (e) {
-    //         setError2(error);
+    //         setError(error);
     //     } finally {
-    //         setLoading2(false);
+    //         setLoading(false);
     //     }
     // }
 
@@ -103,13 +106,13 @@ const App = () => {
 
 
     const getAnimation = () => {
-        app.current?.classList.toggle('fade-in-animation');
-        app.current?.classList.toggle('fade-out-animation');
+        app.current?.classList.add('fade-in-animation');
     }
 
 
     return (
         <div ref={app}>
+            {/* {animation} */}
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error}</p>}
             {weatherData && (
