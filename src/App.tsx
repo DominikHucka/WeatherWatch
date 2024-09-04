@@ -10,9 +10,11 @@ const App = () => {
     const location = 'Reutlingen';
     const lang = 'de';
     const currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&lang=${lang}`;
+    const dailyWeatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}`;
 
 
     const [weatherData, setWeatherData] = React.useState<any | null>(null);
+    const [weatherDaily, setWeatherDaily] = React.useState<any | null>(null);
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
     const currentIcon =
@@ -31,9 +33,16 @@ const App = () => {
         const fetchCurrentWeatherData = async () => {
             catchCurrentWeather();
         };
+
+        const fetchDailyWeatherData = async () => {
+            catchCurrentWeather();
+        };
+
+
         fetchCurrentWeatherData();
+        catchDailyWeatherData();
     },
-        [currentWeatherURL]
+        [currentWeatherURL, dailyWeatherURL]
     );
 
 
@@ -46,6 +55,23 @@ const App = () => {
             const data = await response.json();
             setWeatherData(data);
             console.log('show current weather', data);
+        } catch (e) {
+            setError(error);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+
+    const catchDailyWeatherData = async () => {
+        try {
+            let response = await fetch(dailyWeatherURL);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data2 = await response.json();
+            setWeatherDaily(data2);
+            console.log('show daily weather', data2);
         } catch (e) {
             setError(error);
         } finally {
@@ -79,14 +105,13 @@ const App = () => {
 
     return (
         <div ref={app}>
-            {/* {animation} */}
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error}</p>}
-            {weatherData && (
+            {weatherData && weatherDaily && (
                 <MainPage
                     getAnimation={getAnimation}
                     weatherData={weatherData}
-                    // dailyData={dailyData}
+                    weatherDaily={weatherDaily}
                     weatherIcon={getIconForWeather(weatherData.weather[0].main)}
                 />
             )}

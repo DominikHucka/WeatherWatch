@@ -5,7 +5,7 @@ import DataCard from './dataCard';
 
 interface MainPageProps {
     weatherData: any;
-    // dailyData: any;
+    weatherDaily: any;
     weatherIcon: string;
     getAnimation: () => boolean;
 }
@@ -18,6 +18,12 @@ const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon, getAnimat
     const maxTemp = weatherData.main.temp_max;
     const minTemp = weatherData.main.temp_min;
     const feelsLike = weatherData.main.feels_like;
+    const humidity = weatherData.main.humidity;
+    const pressure = weatherData.main.pressure;
+    const sea = weatherData.main.sea_level;
+    const windSpeed = weatherData.wind.speed;
+    // const coordinations = weatherData.cord.lat + weatherData.cord.lon;
+    // const coordinationsLon = weatherData.cord.lon;
     // const [animated, setAnimate] = React.useState(true);
 
 
@@ -60,12 +66,12 @@ const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon, getAnimat
             <SideBar showSideBar={showSideBar} />
             <div className='cards'>
                 <div className='cards-column'>
-                    <DataCard />
-                    <DataCard />
+                    <DataCard description={humidity} img={'wind.png'} />
+                    <DataCard description={pressure} img={'wind.png'}/>
                 </div>
                 <div className='cards-column'>
-                    <DataCard />
-                    <DataCard />
+                    <DataCard description={windSpeed} img={'wind.png'}/>
+                    <DataCard description={sea} img={'wind.png'}/>
                 </div>
             </div>
         </div>

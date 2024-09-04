@@ -2,13 +2,20 @@ import * as React from 'react';
 import '../css/dataCard.css';
 
 
-const DataCard = () => {
+interface DataCardProps {
+    description: string;
+    img: string;
+}
+
+
+const DataCard: React.FC<DataCardProps> = ({ description, img }) => {
     return <div>
-        <div className="card" style={{width: "10rem", height: "5rem"}}>
-            <img src="..." className="card-img-top" alt="..." />
-                <div className="card-body">
-                    {/* <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> */}
-                </div>
+        <div className="card" style={{ width: "10rem", height: "5rem" }}>
+            <img src={"image/" + img} className="card-img-top" alt="..." style={{height: "auto", width:"50px"}} />
+            {/* <img src="/image/wind.png" alt="" /> */}
+            <div className="card-body">
+                <p className="card-text">{description}</p>
+            </div>
         </div>
     </div>
 }
