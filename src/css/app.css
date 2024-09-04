@@ -1,5 +1,6 @@
 .fade-in-animation {
-    animation: fadeIn forwards 225ms;
+    position: fixed;
+    animation: fadeIn forwards 1s;
 }
 
 
@@ -9,7 +10,7 @@
     }
 
     100% {
-        transform: translateX(80%);
+        transform: translateX(5000px);
     }
 }
 

@@ -2,31 +2,35 @@ import * as React from 'react';
 import '../css/sidebar.css';
 
 interface SideBarProps {
-    // showSideBar: () => void;
+    showSideBar: () => boolean;
 }
 
 
 
-const SideBar: React.FC<SideBarProps> = () => {
-    // let overlaySideBar = React.useRef<HTMLDivElement>(null);
+const SideBar: React.FC<SideBarProps> = ({ showSideBar }) => {
+    let overlaySideBar = React.useRef<HTMLDivElement>(null);
 
 
-    // const handleClick = () => {
-    //     overlaySideBar.current?.classList.add('d-none');
-    //     showSideBar();
-    // }
+    const handleClick = () => {
+        setTimeout(()=> {
+            if (showSideBar()) {
+                overlaySideBar.current?.classList.add('fade-out-animation');
+            } else {
+                overlaySideBar.current?.classList.remove('fade-out-animation');
+            }
+        }, 50);
+        
+    }
 
 
 
 
     return (
-        <div className='overlay'>
+        <div ref={overlaySideBar} className='overlay'>
             <h2>hello</h2>
-            <div>x</div>
+            <div onClick={handleClick}>x</div>
         </div>
-        
     )
-
 }
 
 

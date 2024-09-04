@@ -1,24 +1,24 @@
 import * as React from 'react';
 import '../css/mainPage.css';
 import SideBar from './sidebar';
-
+import DataCard from './dataCard';
 
 interface MainPageProps {
     weatherData: any;
     // dailyData: any;
     weatherIcon: string;
-    getAnimation: () => void;
+    getAnimation: () => boolean;
 }
 
 
 const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon, getAnimation }) => {
-    // let mainPage = React.useRef<HTMLDivElement>(null);
+    let head = React.useRef<HTMLDivElement>(null);
     // const [toggle, getToggle] = React.useState(false);
     const temp = weatherData.main.temp;
     const maxTemp = weatherData.main.temp_max;
     const minTemp = weatherData.main.temp_min;
     const feelsLike = weatherData.main.feels_like;
-    // const [showOverlay, setShowOverlay] = React.useState(false);
+    // const [animated, setAnimate] = React.useState(true);
 
 
     const kelvinToCelsius = (kelvin: number) => {
@@ -26,16 +26,15 @@ const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon, getAnimat
     }
 
 
-    const showSideBar = () => {
+    const showSideBar = (): any => {
         setTimeout(() => {
             getAnimation();
         }, 100);
-        
     }
 
 
     return (
-        <div className='header'>
+        <div ref={head} className='header'>
             <div className='first-section'>
                 <div onClick={showSideBar} className='burger-menu'>
                     <div></div>
@@ -58,7 +57,17 @@ const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon, getAnimat
                 <img className='weather-icon' src={weatherIcon} alt="" />
                 {/* <img className='weather-icon' src={weatherData.weather[0].icon} alt="" /> */}
             </div>
-            <SideBar />
+            <SideBar showSideBar={showSideBar} />
+            <div className='cards'>
+                <div className='cards-column'>
+                    <DataCard />
+                    <DataCard />
+                </div>
+                <div className='cards-column'>
+                    <DataCard />
+                    <DataCard />
+                </div>
+            </div>
         </div>
     )
 }

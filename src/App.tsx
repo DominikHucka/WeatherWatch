@@ -6,19 +6,13 @@ import './css/app.css';
 const App = () => {
     const app = React.useRef<HTMLDivElement>(null);
     const apiKey = process.env.REACT_APP_API;
-    // const apiDaily = process.env.REACT_APP_API_DAILY;
     // const location = navigator.geolocation.getCurrentPosition;
-    // const monitoring = 'hourly'
     const location = 'Reutlingen';
     const lang = 'de';
     const currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&lang=${lang}`;
-    // const forecastDailyURL = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&lang=${lang}`;
-    // const forecastDailyURL = `https://api.openweathermap.org/data/3.0/oweather?q=${location}&exclude=${monitoring}&appid=${apiKey}`;
-    // const animation = false;
 
 
     const [weatherData, setWeatherData] = React.useState<any | null>(null);
-    // const [dailyData, setDailyData] = React.useState<any | null>(null);
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
     const currentIcon =
@@ -37,14 +31,6 @@ const App = () => {
         const fetchCurrentWeatherData = async () => {
             catchCurrentWeather();
         };
-
-
-        // const fetchDailyWeatherData = async () => {
-        //     catchDailyWeather();
-        // };
-
-
-        // fetchDailyWeatherData();
         fetchCurrentWeatherData();
     },
         [currentWeatherURL]
@@ -68,25 +54,6 @@ const App = () => {
     }
 
 
-    // const catchDailyWeather = async () => {
-    //     try {
-    //         let response = await fetch(forecastDailyURL);
-    //         console.log("test", response);
-    //         if (!response.ok) {
-    //             throw new Error('Network response was not ok');
-    //         }
-    //         const data2 = await response.json();
-            
-    //         setDailyData(data2);
-    //         console.log('show daily weather', data2);
-    //     } catch (e) {
-    //         setError(error);
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // }
-
-
     const getIconForWeather = (weatherDescription: string) => {
         switch (weatherDescription) {
             case 'Rain':
@@ -105,7 +72,7 @@ const App = () => {
     };
 
 
-    const getAnimation = () => {
+    const getAnimation = (): any => {
         app.current?.classList.add('fade-in-animation');
     }
 

@@ -54,3 +54,16 @@
     display: flex;
     gap: 10px;
 }
+
+
+.cards {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+.cards-column {
+    display: flex;
+    gap: 20px;
+}
