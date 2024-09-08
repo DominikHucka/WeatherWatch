@@ -20,7 +20,7 @@ const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon, getAnimat
     const feelsLike = weatherData.main.feels_like;
     const humidity = weatherData.main.humidity;
     const pressure = weatherData.main.pressure;
-    const sea = weatherData.main.sea_level;
+    // const sea = weatherData.main.sea_level;
     const windSpeed = weatherData.wind.speed;
     // const coordinations = weatherData.cord.lat + weatherData.cord.lon;
     // const coordinationsLon = weatherData.cord.lon;
@@ -66,12 +66,12 @@ const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon, getAnimat
             <SideBar showSideBar={showSideBar} />
             <div className='cards'>
                 <div className='cards-column'>
-                    <DataCard description={humidity} img={'wind.png'} />
-                    <DataCard description={pressure} img={'wind.png'}/>
+                    <DataCard title={'Feuchtigkeit'} value={humidity} img={'humidity.png'} />
+                    <DataCard title={'Luftdruck'} value={pressure} img={'pressure.png'}/>
                 </div>
                 <div className='cards-column'>
-                    <DataCard description={windSpeed} img={'wind.png'}/>
-                    <DataCard description={sea} img={'wind.png'}/>
+                    <DataCard title={'Wind'} value={windSpeed} img={'wind.png'}/>
+                    <DataCard title={'Temperatur'} value={temp} img={'temperature.png'}/>
                 </div>
             </div>
         </div>
