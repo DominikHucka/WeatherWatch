@@ -2,6 +2,7 @@ import * as React from 'react';
 import '../css/mainPage.css';
 import SideBar from './sidebar';
 import DataCard from './dataCard';
+import ForecastCard from './forecastCard';
 
 interface MainPageProps {
     weatherData: any;
@@ -32,8 +33,8 @@ const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon, getAnimat
     // }
 
 
-    const kilometerProHour = (hour: number) => {
-        return ()
+    const kilometerPerHour = (hour: number) => {
+        return (hour * 3.6).toFixed();
     }
 
 
@@ -73,17 +74,18 @@ const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon, getAnimat
                 {/* <img className='weather-icon' src={weatherData.weather[0].icon} alt="" /> */}
             </div>
             <SideBar showSideBar={showSideBar} />
+            <ForecastCard />
             <div className='cards'>
                 <div className='cards-column'>
                     <DataCard title={'Feuchtigkeit'} value={humidity + '%'} img={'humidity.png'} />
-                    <DataCard title={'Luftdruck'} value={pressure + 'hPa'} img={'pressure.png'} />
+                    <DataCard title={'Luftdruck'} value={pressure + 'mbar'} img={'pressure.png'} />
                 </div>
                 <div className='cards-column'>
-                    <DataCard title={'Wind'} value={windSpeed} img={'wind.png'} />
+                    <DataCard title={'Wind'} value={kilometerPerHour(windSpeed) + 'km/h'} img={'wind.png'} />
                     <DataCard title={'Temperatur'} value={temp.toFixed() + '°'} img={'temperature.png'} />
                 </div>
             </div>
-        </div>
+        </div>                                                                                                
     )
 }
 

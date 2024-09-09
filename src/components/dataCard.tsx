@@ -3,7 +3,7 @@ import '../css/dataCard.css';
 
 
 interface DataCardProps {
-    value: string;
+    value: string | number;
     img: string;
     title: string;
 }
@@ -11,9 +11,9 @@ interface DataCardProps {
 
 const DataCard: React.FC<DataCardProps> = ({ value, img, title }) => {
     return <div>
-        <div className="card" style={{ width: "10rem", height: "6rem" }}>
-            <div className='description'>
-                <img src={"image/" + img} className="card-img-top" alt="..." style={{ height: "auto", width: "40px" }} />
+        <div className="card" style={{ width: "12rem", height: "6rem" }}>
+            <div className='description' style={{ width: "10rem", height: "2rem" }}>
+                <img src={"image/" + img} className="card-img-top" alt="..." style={{ height: "auto", width: "25px" }} />
                 <span style={{ fontSize: "16px" }}>{title}</span>
             </div>
             {/* <img src="/image/wind.png" alt="" /> */}

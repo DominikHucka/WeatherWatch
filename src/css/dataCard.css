@@ -1,5 +1,7 @@
 .card {
     background-color: rgba(105, 161, 239, .5);
+    padding: 5px 0px 0px 5px;
+    border-radius: 20px;
 }
 
 
@@ -11,5 +13,11 @@
 
 
 .description span {
-    /* text-align: center; */
+    font-size: 12px !important;
+    font-weight: 100;
+    text-align: center;
+}
+
+.card-text {
+    font-size: 24px !important;
 }

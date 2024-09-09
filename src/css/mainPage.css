@@ -59,11 +59,11 @@
 .cards {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
 }
 
 
 .cards-column {
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
 }
