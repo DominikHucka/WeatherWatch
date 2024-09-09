@@ -7,9 +7,10 @@ const App = () => {
     const app = React.useRef<HTMLDivElement>(null);
     const apiKey = process.env.REACT_APP_API;
     // const location = navigator.geolocation.getCurrentPosition;
+    const valueParam = 'metric';
     const location = 'Reutlingen';
     const lang = 'de';
-    const currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&lang=${lang}`;
+    const currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&lang=${lang}&units=${valueParam}`;
     const dailyWeatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}`;
 
 

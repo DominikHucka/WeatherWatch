@@ -27,8 +27,13 @@ const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon, getAnimat
     // const [animated, setAnimate] = React.useState(true);
 
 
-    const kelvinToCelsius = (kelvin: number) => {
-        return (kelvin - 273.15).toFixed();
+    // const kelvinToCelsius = (kelvin: number) => {
+    //     return (kelvin - 273.15).toFixed();
+    // }
+
+
+    const kilometerProHour = (hour: number) => {
+        return ()
     }
 
 
@@ -51,14 +56,18 @@ const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon, getAnimat
             </div>
             <div className='second-section'>
                 <div className='second-section-data'>
-                    <h1>{kelvinToCelsius(temp)} °</h1>
+                    {/* <h1>{kelvinToCelsius(temp)} °</h1> */}
+                    <h1>{temp.toFixed()} °</h1>
                     <h3> {weatherData.weather[0].description} </h3>
                     <div className='min-max-temprature'>
-                        <span>max {kelvinToCelsius(maxTemp)} °</span>
+                        {/* <span>max {kelvinToCelsius(maxTemp)} °</span> */}
+                        <span>max {maxTemp.toFixed()} °</span>
                         <span>/</span>
-                        <span>min {kelvinToCelsius(minTemp)} °</span>
+                        {/* <span>min {kelvinToCelsius(minTemp)} °</span> */}
+                        <span>min {minTemp.toFixed()} °</span>
                     </div>
-                    <span>Gefühlt wie {kelvinToCelsius(feelsLike)} °</span>
+                    {/* <span>Gefühlt wie {kelvinToCelsius(feelsLike)} °</span> */}
+                    <span>Gefühlt wie {feelsLike.toFixed()} °</span>
                 </div>
                 <img className='weather-icon' src={weatherIcon} alt="" />
                 {/* <img className='weather-icon' src={weatherData.weather[0].icon} alt="" /> */}
@@ -66,12 +75,12 @@ const MainPage: React.FC<MainPageProps> = ({ weatherData, weatherIcon, getAnimat
             <SideBar showSideBar={showSideBar} />
             <div className='cards'>
                 <div className='cards-column'>
-                    <DataCard title={'Feuchtigkeit'} value={humidity} img={'humidity.png'} />
-                    <DataCard title={'Luftdruck'} value={pressure} img={'pressure.png'}/>
+                    <DataCard title={'Feuchtigkeit'} value={humidity + '%'} img={'humidity.png'} />
+                    <DataCard title={'Luftdruck'} value={pressure + 'hPa'} img={'pressure.png'} />
                 </div>
                 <div className='cards-column'>
-                    <DataCard title={'Wind'} value={windSpeed} img={'wind.png'}/>
-                    <DataCard title={'Temperatur'} value={temp} img={'temperature.png'}/>
+                    <DataCard title={'Wind'} value={windSpeed} img={'wind.png'} />
+                    <DataCard title={'Temperatur'} value={temp.toFixed() + '°'} img={'temperature.png'} />
                 </div>
             </div>
         </div>

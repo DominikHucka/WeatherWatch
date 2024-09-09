@@ -11,10 +11,10 @@ interface DataCardProps {
 
 const DataCard: React.FC<DataCardProps> = ({ value, img, title }) => {
     return <div>
-        <div className="card" style={{ width: "10rem", height: "5rem" }}>
+        <div className="card" style={{ width: "10rem", height: "6rem" }}>
             <div className='description'>
                 <img src={"image/" + img} className="card-img-top" alt="..." style={{ height: "auto", width: "40px" }} />
-                <p style={{ fontSize: "16px" }}>{title}</p>
+                <span style={{ fontSize: "16px" }}>{title}</span>
             </div>
             {/* <img src="/image/wind.png" alt="" /> */}
             <div className="card-body">
